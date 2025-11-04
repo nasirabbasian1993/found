@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-// import { Geist_Mono } from "next/font/google"; 
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "FUND-FOR-FOUND",
@@ -15,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-gray-50"> 
+    <html lang="en" className={inter.className}> 
      <body>
         <Header />
         <main className="min-h-[calc(100vh-140px)]"> 

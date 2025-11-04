@@ -1,7 +1,7 @@
 'use client'; 
 
-import { Search } from 'lucide-react'; 
-import React from 'react';
+import { Search, Menu, X } from 'lucide-react';
+import React, { useState, MouseEventHandler } from 'react'; 
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -19,17 +19,20 @@ interface NavLinkProps {
   href: string;
   children: React.ReactNode;
   className?: string;
+  
+  onClick?: MouseEventHandler<HTMLAnchorElement>; 
 }
 
 
-const NavLink: React.FC<NavLinkProps> = ({ href, children, className }) => (
-  <Link href={href} className={className}>
+const NavLink: React.FC<NavLinkProps> = ({ href, children, className, onClick }) => ( 
+  <Link href={href} className={className} onClick={onClick}> 
     {children}
   </Link>
 );
 
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   const user: User | null = null; 
 
@@ -42,7 +45,8 @@ const Header = () => {
   
   
   return (
-    <header className="bg-white relative z-10" dir="ltr"> 
+    <header className="bg-white relative z-50" dir="ltr"> 
+      
       <div className="max-w-7xl mx-auto h-20 flex items-center px-6 sm:px-8 lg:px-12">
         
         <NavLink href="/" className="flex-shrink-0">
@@ -86,12 +90,18 @@ const Header = () => {
                 <Search className="w-5 h-5" />
             </div>
           </div>
+          
+          <div className="block lg:hidden">
+              <Search className="w-6 h-6 text-gray-500 cursor-pointer hover:text-indigo-600" />
+          </div>
+
 
           {user ? (
             
             <NavLink 
               href="/profile" 
               className="relative w-11 h-11 flex items-center justify-center rounded-full overflow-hidden p-0.5 bg-[#DDDFFF]"
+              onClick={() => setIsMenuOpen(false)}
             >
                 <div className="w-full h-full rounded-full overflow-hidden bg-gray-200">
                     <Image 
@@ -106,14 +116,52 @@ const Header = () => {
           ) : (
             <NavLink 
               href="/login" 
-              className="px-5 py-2 text-sm font-semibold text-indigo-700 bg-white border border-indigo-200 rounded-full hover:bg-indigo-50 transition shadow-sm"
+              className="px-5 py-2 text-sm font-semibold text-indigo-700 bg-white border border-indigo-200 rounded-full hover:bg-indigo-50 transition shadow-sm hidden lg:block" 
+              onClick={() => setIsMenuOpen(false)}
             >
               Sign In
             </NavLink>
           )}
+
+          <button 
+            className="md:hidden text-gray-500 hover:text-indigo-600 p-2 rounded-full transition"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle mobile menu"
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
       </div>
       
+      <div className={`
+        md:hidden 
+        absolute w-full bg-white shadow-lg border-t border-gray-100 
+        transition-all duration-300 ease-in-out
+        ${isMenuOpen ? 'opacity-100 max-h-screen py-4' : 'opacity-0 max-h-0 overflow-hidden'}
+      `}>
+        <nav className="flex flex-col space-y-2 px-6">
+            {navLinks.map((link) => (
+                <NavLink 
+                    key={link.name}
+                    href={link.href} 
+                    className="text-gray-700 hover:text-indigo-600 font-medium py-2 border-b border-gray-50 last:border-b-0"
+                    onClick={() => setIsMenuOpen(false)} 
+                >
+                    {link.name}
+                </NavLink>
+            ))}
+            {!user && (
+                <NavLink 
+                    href="/login" 
+                    className="px-5 py-2 text-sm font-semibold text-indigo-700 bg-white border border-indigo-200 rounded-full hover:bg-indigo-50 transition shadow-sm text-center block mt-2" 
+                    onClick={() => setIsMenuOpen(false)}
+                >
+                    Sign In
+                </NavLink>
+            )}
+        </nav>
+      </div>
+
       <div 
         className="absolute bottom-0 w-full h-px" 
         style={{ backgroundColor: '#DCDAFF' }} 

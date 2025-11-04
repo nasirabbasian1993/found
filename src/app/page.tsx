@@ -1,4 +1,3 @@
-
 'use client'; 
 import React, { useState } from 'react';
 import Image from 'next/image';
@@ -14,31 +13,33 @@ export default function LandingPage() {
     };
 
     return (
-        <main className="min-h-screen bg-white pt-[100px] pb-20"> 
+        <main className="min-h-screen bg-white pt-[100px] pb-20 px-6 sm:px-8"> 
             <div className="max-w-6xl mx-auto">
                 
                 <h1 
-                    className="text-4xl md:text-4xl whitespace-nowrap leading-tight mb-6 px-12 text-[#270F94] text-left" 
-            >
+                    className="text-4xl md:text-5xl leading-tight mb-6 md:px-12 text-[#270F94] text-left" 
+                >
                     Create your profile and take the first step towards new opportunities
                 </h1>
                 
                 <div className="mb-16">
                     <p 
-                        className="text-center text-lg px-12 text-gray-400"
+                        className="text-left text-lg md:text-xl md:px-12 text-gray-500" 
                     >
                         By creating your account, you’ll gain access to a thriving community where brands and individuals are committed to offering you ongoing support. This support network will empower you with the resources, guidance, and connections you need to succeed, ensuring that you’re never alone on your journey.
                     </p>
                 </div>
 
 
-                <div className="flex justify-center items-stretch space-x-8">
+                <div 
+                    className="flex flex-col md:flex-row justify-center items-center md:items-stretch space-y-6 md:space-y-0 md:space-x-8"
+                >
                 
                     <div 
-                        className="bg-white border border-[#644FC1] rounded-xl w-[320px] h-[460px] p-10 flex flex-col items-center shadow-sm" 
+                        className="bg-white border border-[#644FC1] rounded-xl w-full md:w-[320px] h-auto p-8 md:p-10 flex flex-col items-center shadow-sm" 
                     >
                         
-                        <div>
+                        <div className="mb-8 mt-4 md:mt-0"> 
                             <Image 
                               src={bagSrc} 
                               alt="Briefcase Icon" 
@@ -51,11 +52,11 @@ export default function LandingPage() {
                         </div>
 
                         <h2 
-                            className="text-2xl mb-4 mt-[80px] text-center text-[#644FC1]"
+                            className="text-2xl mb-4 mt-8 md:mt-[80px] text-center text-[#644FC1]"
                         >
                             Brand or organization
                         </h2>
-                        <p className="text-sm text-gray-500 mb-8 text-left w-full"> 
+                        <p className="text-sm text-gray-500 mb-8 text-center w-full"> 
                             If your brand is established and you’re looking for continuous support, get started now.
                         </p>
 
