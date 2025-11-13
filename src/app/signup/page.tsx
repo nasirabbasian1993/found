@@ -74,7 +74,6 @@ const FormField: React.FC<FormFieldProps> = ({ id, label, type, placeholder, val
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
-                // تغییر از border-2 به border برای نازک‌تر شدن
                 className="w-full px-4 py-3 border border-[#5C4FC1] rounded-lg focus:ring-[#5C4FC1] focus:border-[#5C4FC1] transition placeholder-gray-400"
             />
         </div>
@@ -121,12 +120,13 @@ export default function SignupDetailsPage() {
                         </div>
                     </div>
 
-                    <button
+                    <Link
+                        href="http://localhost:3000/google-select"
                         className="w-full flex items-center justify-center py-3 border border-gray-300 rounded-lg mb-6 
                                    font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 transition shadow-sm"
                     >
                         <span className="text-base">Continue with google</span>
-                    </button>
+                    </Link>
                     
 
                     <div className="flex items-center my-6">
@@ -194,7 +194,7 @@ export default function SignupDetailsPage() {
                     apply.
                 </p>
 
-                <p className="text-sm font-semibold mt-2 block sm:hidden">
+                <p className="text-xs text-gray-400 leading-relaxed block sm:hidden"> 
                     <Link href="/privacy" className="text-[#5C4FC1] hover:text-[#270F94] underline">
                         Privacy Policy
                     </Link> 
@@ -208,3 +208,4 @@ export default function SignupDetailsPage() {
         </div>
     );
 }
+
