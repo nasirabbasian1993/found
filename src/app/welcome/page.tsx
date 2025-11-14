@@ -9,7 +9,6 @@ const SUBTEXT = 'Your journey begins here.\nReady to start?';
 
 export default function WelcomePage() {
     
-    // مسیر به /welcome.png (با e پایانی) تنظیم شد
     const illustrationPath = '/welcome.png'; 
 
     return (
